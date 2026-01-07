@@ -548,7 +548,7 @@ const Footer = ({ setView }: { setView: (v: string) => void }) => (
           <button onClick={() => { setView('terms'); window.scrollTo(0,0); }} className="hover:text-white transition-colors">Terms of Service</button>
           <button onClick={() => { setView('contact'); window.scrollTo(0,0); }} className="hover:text-white transition-colors">Contact Us</button>
         </div>
-        <p className="text-gray-500 text-sm">© 2024 NextFlow AI Agency.</p>
+        <p className="text-gray-500 text-sm">© 2026 NextFlow AI Agency.</p>
       </div>
     </div>
   </footer>
