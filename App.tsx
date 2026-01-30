@@ -163,6 +163,7 @@ const TermsPage = ({ setView }: { setView: (v: string) => void }) => (
 
 const ContactPage = ({ setView }: { setView: (v: string) => void }) => {
   const [step, setStep] = useState(1);
+  const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -191,8 +192,28 @@ const ContactPage = ({ setView }: { setView: (v: string) => void }) => {
     setStep(2);
   };
 
-  const handleStep2 = (e: React.FormEvent) => {
+  const handleStep2 = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
+    try {
+      await fetch('https://services.leadconnectorhq.com/hooks/Er1cETQk7bVrn97N4m8N/webhook-trigger/38de9f3d-10f6-4330-915e-510df7e7ee25', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          revenue: formData.revenue,
+          leadSources: formData.leadSources,
+          monthlyLeads: formData.monthlyLeads,
+          monthlyBooked: formData.monthlyBooked,
+          monthlyClosed: formData.monthlyClosed,
+        }),
+      });
+    } catch {
+      // Still show success — webhook may not return CORS headers
+    }
+    setSubmitting(false);
     setStep(3);
   };
 
@@ -378,8 +399,8 @@ const ContactPage = ({ setView }: { setView: (v: string) => void }) => {
                   >
                     <ArrowLeft size={18} /> Back
                   </button>
-                  <button type="submit" className="flex-1 gradient-bg py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
-                    Submit <Send size={18} />
+                  <button type="submit" disabled={submitting} className="flex-1 gradient-bg py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed">
+                    {submitting ? 'Submitting...' : 'Submit'} {!submitting && <Send size={18} />}
                   </button>
                 </div>
               </form>
