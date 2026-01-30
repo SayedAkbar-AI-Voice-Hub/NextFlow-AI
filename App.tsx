@@ -101,7 +101,7 @@ const PrivacyPage = ({ setView }: { setView: (v: string) => void }) => (
       <h1 className="text-4xl md:text-5xl font-bold mb-8">Privacy Policy</h1>
       <div className="glass-card p-8 md:p-12 rounded-3xl text-gray-300 space-y-6 leading-relaxed">
         <p className="font-bold text-white">NextFlow AI Privacy Policy</p>
-        <p className="text-sm">Last updated: January 2024</p>
+        <p className="text-sm">Last updated: January 2026</p>
         
         <p>This Privacy Policy describes how NextFlow AI (the "Site", "we", "us", or "our") collects, uses, and discloses your personal information when you visit, use our services, or communicate with us (collectively, the "Services").</p>
 
@@ -162,14 +162,41 @@ const TermsPage = ({ setView }: { setView: (v: string) => void }) => (
 );
 
 const ContactPage = ({ setView }: { setView: (v: string) => void }) => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    revenue: '',
+    leadSources: [] as string[],
+    monthlyLeads: '',
+    monthlyBooked: '',
+    monthlyClosed: '',
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`Contact from ${formData.name}`);
-    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
-    window.location.href = `mailto:sayedakbar@aivoicehub.site?subject=${subject}&body=${body}`;
+  const revenueOptions = ['Under $100K', '$100K – $500K', '$500K – $1M', '$1M – $3M', '$3M+'];
+  const leadSourceOptions = ['Facebook Ads', 'Zillow', 'Realtor.com', 'Google Ads', 'Referrals', 'Open Houses', 'Other'];
+
+  const toggleLeadSource = (source: string) => {
+    setFormData(prev => ({
+      ...prev,
+      leadSources: prev.leadSources.includes(source)
+        ? prev.leadSources.filter(s => s !== source)
+        : [...prev.leadSources, source]
+    }));
   };
+
+  const handleStep1 = (e: React.FormEvent) => {
+    e.preventDefault();
+    setStep(2);
+  };
+
+  const handleStep2 = (e: React.FormEvent) => {
+    e.preventDefault();
+    setStep(3);
+  };
+
+  const inputClass = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors";
 
   return (
     <div className="pt-32 pb-24 min-h-[80vh] flex flex-col justify-center">
@@ -177,12 +204,12 @@ const ContactPage = ({ setView }: { setView: (v: string) => void }) => {
         <button onClick={() => { setView('home'); window.scrollTo(0,0); }} className="flex items-center gap-2 text-purple-400 mb-8 hover:text-purple-300 transition-colors">
           <ArrowLeft size={20} /> Back to Home
         </button>
-        
+
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">Let's <span className="gradient-text">Connect.</span></h1>
             <p className="text-xl text-gray-400 mb-10">Whether you're ready to automate your lead flow or just have a few questions, we're here to help.</p>
-            
+
             <div className="space-y-6">
               <div className="flex items-center gap-4 group">
                 <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500 group-hover:bg-purple-500 group-hover:text-white transition-all">
@@ -193,14 +220,14 @@ const ContactPage = ({ setView }: { setView: (v: string) => void }) => {
                   <a href="mailto:sayedakbar@aivoicehub.site" className="text-lg font-bold hover:text-purple-400 transition-colors">sayedakbar@aivoicehub.site</a>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-4 group">
                 <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500 group-hover:bg-purple-500 group-hover:text-white transition-all">
                   <CalendarDays size={20} />
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Fast Track</p>
-                  <button 
+                  <button
                     data-cal-link="sayed-akbar-saadat-pevegt/discovery-call"
                     data-cal-namespace="discovery-call"
                     data-cal-config='{"layout":"month_view"}'
@@ -215,45 +242,164 @@ const ContactPage = ({ setView }: { setView: (v: string) => void }) => {
 
           <div className="glass-card p-10 rounded-3xl border border-purple-500/20 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-3xl -z-10"></div>
-            <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div>
-                <label className="text-sm text-gray-400 mb-1 block">Your Name</label>
-                <input 
-                  type="text" 
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors" 
-                  placeholder="Jane Doe" 
-                />
+
+            {step < 3 && (
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold">{step === 1 ? 'Get in Touch' : 'Tell Us About Your Business'}</h3>
+                <span className="text-sm text-gray-500">Step {step} of 2</span>
               </div>
-              <div>
-                <label className="text-sm text-gray-400 mb-1 block">Email Address</label>
-                <input 
-                  type="email" 
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors" 
-                  placeholder="jane@realty.com" 
-                />
+            )}
+
+            {step === 1 && (
+              <form className="space-y-4" onSubmit={handleStep1}>
+                <div>
+                  <label className="text-sm text-gray-400 mb-1 block">Your Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className={inputClass}
+                    placeholder="Jane Doe"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm text-gray-400 mb-1 block">Email Address</label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className={inputClass}
+                    placeholder="jane@realty.com"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm text-gray-400 mb-1 block">Phone Number</label>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className={inputClass}
+                    placeholder="(555) 123-4567"
+                  />
+                </div>
+                <button type="submit" className="w-full gradient-bg py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+                  Next <ArrowRight size={18} />
+                </button>
+              </form>
+            )}
+
+            {step === 2 && (
+              <form className="space-y-5" onSubmit={handleStep2}>
+                <div>
+                  <label className="text-sm text-gray-400 mb-2 block">Annual Revenue</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {revenueOptions.map(option => (
+                      <button
+                        type="button"
+                        key={option}
+                        onClick={() => setFormData({...formData, revenue: option})}
+                        className={`px-3 py-2.5 rounded-xl text-sm font-medium border transition-all ${
+                          formData.revenue === option
+                            ? 'border-purple-500 bg-purple-500/20 text-white'
+                            : 'border-white/10 bg-white/5 text-gray-400 hover:border-white/20'
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-sm text-gray-400 mb-2 block">Where do you get your leads?</label>
+                  <div className="flex flex-wrap gap-2">
+                    {leadSourceOptions.map(source => (
+                      <button
+                        type="button"
+                        key={source}
+                        onClick={() => toggleLeadSource(source)}
+                        className={`px-3 py-2 rounded-full text-sm font-medium border transition-all ${
+                          formData.leadSources.includes(source)
+                            ? 'border-purple-500 bg-purple-500/20 text-white'
+                            : 'border-white/10 bg-white/5 text-gray-400 hover:border-white/20'
+                        }`}
+                      >
+                        {source}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-sm text-gray-400 mb-1 block">How many leads per month?</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={formData.monthlyLeads}
+                    onChange={(e) => setFormData({...formData, monthlyLeads: e.target.value})}
+                    className={inputClass}
+                    placeholder="e.g. 50"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-sm text-gray-400 mb-1 block">Booked / month</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={formData.monthlyBooked}
+                      onChange={(e) => setFormData({...formData, monthlyBooked: e.target.value})}
+                      className={inputClass}
+                      placeholder="e.g. 15"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-gray-400 mb-1 block">Closed / month</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={formData.monthlyClosed}
+                      onChange={(e) => setFormData({...formData, monthlyClosed: e.target.value})}
+                      className={inputClass}
+                      placeholder="e.g. 5"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setStep(1)}
+                    className="flex-1 py-4 rounded-xl font-bold border border-white/10 hover:border-white/20 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <ArrowLeft size={18} /> Back
+                  </button>
+                  <button type="submit" className="flex-1 gradient-bg py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+                    Submit <Send size={18} />
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {step === 3 && (
+              <div className="text-center py-8">
+                <div className="w-20 h-20 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle2 size={40} className="text-green-500" />
+                </div>
+                <h3 className="text-2xl font-bold mb-3">Thank You!</h3>
+                <p className="text-gray-400 mb-8">We've received your information and will be in touch shortly.</p>
+                <button
+                  onClick={() => { setView('home'); window.scrollTo(0,0); }}
+                  className="gradient-bg px-8 py-3 rounded-xl font-bold hover:opacity-90 transition-opacity"
+                >
+                  Back to Home
+                </button>
               </div>
-              <div>
-                <label className="text-sm text-gray-400 mb-1 block">Message</label>
-                <textarea 
-                  rows={4} 
-                  required
-                  value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors" 
-                  placeholder="How can we help your business?"
-                ></textarea>
-              </div>
-              <button type="submit" className="w-full gradient-bg py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
-                <Send size={18} /> Send Email
-              </button>
-            </form>
+            )}
           </div>
         </div>
       </div>
