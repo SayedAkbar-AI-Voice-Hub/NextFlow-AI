@@ -53,8 +53,8 @@ const Logo = ({ onClick }: { onClick?: () => void }) => (
 
     {/* Text Part: NEXTFLOW (white) AI (purple) */}
     <div className="flex items-baseline font-bold tracking-tighter text-2xl uppercase">
-      <span className="text-white">NextFlow</span>
-      <span className="text-[#a855f7] ml-1.5">AI</span>
+      <span className="text-white">AI Voice</span>
+      <span className="text-[#a855f7] ml-1.5">Hub</span>
     </div>
   </div>
 );
@@ -99,74 +99,6 @@ const Navbar = ({ setView }: { setView: (v: string) => void }) => {
   );
 };
 
-const PrivacyPage = ({ setView }: { setView: (v: string) => void }) => (
-  <div className="pt-32 pb-24">
-    <div className="container mx-auto px-6 max-w-4xl">
-      <button onClick={() => { setView('home'); window.scrollTo(0,0); }} className="flex items-center gap-2 text-purple-400 mb-8 hover:text-purple-300 transition-colors">
-        <ArrowLeft size={20} /> Back to Home
-      </button>
-      <h1 className="text-4xl md:text-5xl font-bold mb-8">Privacy Policy</h1>
-      <div className="glass-card p-8 md:p-12 rounded-3xl text-gray-300 space-y-6 leading-relaxed">
-        <p className="font-bold text-white">NextFlow AI Privacy Policy</p>
-        <p className="text-sm">Last updated: January 2026</p>
-
-        <p>This Privacy Policy describes how NextFlow AI (the "Site", "we", "us", or "our") collects, uses, and discloses your personal information when you visit, use our services, or communicate with us (collectively, the "Services").</p>
-
-        <h3 className="text-xl font-bold text-white mt-8">1. How We Collect Your Personal Information</h3>
-        <p>To provide the Services, we collect personal information about you from a variety of sources. The information we collect directly from you may include: basic contact details (name, address, phone number, email), account information, and customer support communications.</p>
-
-        <h3 className="text-xl font-bold text-white mt-8">2. Information Collected Through Cookies</h3>
-        <p>We automatically collect certain information about your interaction with the Services ("Usage Data"). To do this, we may use cookies, pixels and similar technologies. Usage Data may include information about how you access and use our Site, including device information, browser information, and IP address.</p>
-
-        <h3 className="text-xl font-bold text-white mt-8">3. How We Use Your Personal Information</h3>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Providing Products and Services to perform our contract with you.</li>
-          <li>Marketing and Advertising to send promotional communications.</li>
-          <li>Security and Fraud Prevention to detect and investigate malicious activity.</li>
-          <li>Communicating with you to provide customer support.</li>
-        </ul>
-
-        <h3 className="text-xl font-bold text-white mt-8">4. Your Rights and Choices</h3>
-        <p>Depending on where you live, you may have rights relating to your personal information, including the right to access, delete, correct, or opt out of targeted advertising.</p>
-
-        <h3 className="text-xl font-bold text-white mt-8">5. Contact</h3>
-        <p>If you have complaints about how we process your personal information, please contact us at: <span className="text-purple-400">sayedakbar@aivoicehub.site</span></p>
-      </div>
-    </div>
-  </div>
-);
-
-const TermsPage = ({ setView }: { setView: (v: string) => void }) => (
-  <div className="pt-32 pb-24">
-    <div className="container mx-auto px-6 max-w-4xl">
-      <button onClick={() => { setView('home'); window.scrollTo(0,0); }} className="flex items-center gap-2 text-purple-400 mb-8 hover:text-purple-300 transition-colors">
-        <ArrowLeft size={20} /> Back to Home
-      </button>
-      <h1 className="text-4xl md:text-5xl font-bold mb-8">Terms of Service</h1>
-      <div className="glass-card p-8 md:p-12 rounded-3xl text-gray-300 space-y-6 leading-relaxed">
-        <p className="font-bold text-white">TERMS OF SERVICE</p>
-
-        <h3 className="text-xl font-bold text-white mt-8">OVERVIEW</h3>
-        <p>This website is operated by NextFlow AI. Throughout the site, the terms "we", "us" and "our" refer to NextFlow AI. NextFlow AI offers this website, including all information, tools and Services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.</p>
-
-        <h3 className="text-xl font-bold text-white mt-8">SECTION 1 - ONLINE STORE TERMS</h3>
-        <p>By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence. You may not use our products for any illegal or unauthorized purpose.</p>
-
-        <h3 className="text-xl font-bold text-white mt-8">SECTION 2 - GENERAL CONDITIONS</h3>
-        <p>We reserve the right to refuse service to anyone for any reason at any time. You understand that your content (not including credit card information), may be transferred unencrypted.</p>
-
-        <h3 className="text-xl font-bold text-white mt-8">SECTION 13 - DISCLAIMER OF WARRANTIES</h3>
-        <p>We do not guarantee, represent or warrant that your use of our service will be uninterrupted, timely, secure or error-free. In no case shall NextFlow AI, our directors, officers, employees, or affiliates be liable for any injury, loss, or claim.</p>
-
-        <h3 className="text-xl font-bold text-white mt-8">SECTION 18 - GOVERNING LAW</h3>
-        <p>These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of United Arab Emirates.</p>
-
-        <h3 className="text-xl font-bold text-white mt-8">SECTION 20 - CONTACT INFORMATION</h3>
-        <p>Questions about the Terms of Service should be sent to us at <span className="text-purple-400">sayedakbar@aivoicehub.site</span>.</p>
-      </div>
-    </div>
-  </div>
-);
 
 const ContactPage = ({ setView }: { setView: (v: string) => void }) => {
   const [step, setStep] = useState(1);
@@ -484,7 +416,7 @@ const Industries = () => (
 const Comparison = () => (
   <section className="py-20 bg-[#050505]">
     <div className="container mx-auto px-6">
-      <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">No Website vs <span className="text-purple-500">NextFlow Website</span></h2>
+      <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">No Website vs <span className="text-purple-500">AI Voice Hub Website</span></h2>
       <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         <div className="bg-red-500/5 border border-red-500/20 p-8 rounded-3xl">
           <h3 className="text-xl font-bold text-red-400 mb-6 flex items-center gap-2">
@@ -499,7 +431,7 @@ const Comparison = () => (
         </div>
         <div className="bg-purple-500/5 border border-purple-500/20 p-8 rounded-3xl glow-purple">
           <h3 className="text-xl font-bold text-purple-400 mb-6 flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-purple-500"></div> With NextFlow Website
+            <div className="w-2 h-2 rounded-full bg-purple-500"></div> With AI Voice Hub Website
           </h3>
           <ul className="space-y-4 text-gray-200">
             <li className="flex gap-3 font-medium">✅ <span className="text-white">Show up when customers search "plumber near me".</span></li>
@@ -554,7 +486,7 @@ const Benefits = () => (
     <div className="container mx-auto px-6">
       <div className="flex flex-col md:flex-row items-center gap-16">
         <div className="flex-1">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">Why Local Businesses Choose NextFlow</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">Why Local Businesses Choose AI Voice Hub</h2>
           <div className="space-y-8">
             <div className="flex gap-6">
               <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0">
@@ -635,7 +567,7 @@ const Testimonials = () => (
           {
             name: "Mike Thompson",
             role: "Thompson HVAC Services",
-            content: "Since getting our NextFlow website, we've doubled our service calls. Customers can book online even when we're out on jobs. Best investment I've made for my business.",
+            content: "Since getting our AI Voice Hub website, we've doubled our service calls. Customers can book online even when we're out on jobs. Best investment I've made for my business.",
             image: "https://i.pravatar.cc/150?u=mike"
           },
           {
@@ -726,11 +658,12 @@ const Footer = ({ setView }: { setView: (v: string) => void }) => (
       <div className="flex flex-col md:flex-row justify-between items-center gap-8">
         <Logo onClick={() => { setView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
         <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-500">
-          <button onClick={() => { setView('privacy'); window.scrollTo(0,0); }} className="hover:text-white transition-colors">Privacy Policy</button>
-          <button onClick={() => { setView('terms'); window.scrollTo(0,0); }} className="hover:text-white transition-colors">Terms of Service</button>
+          <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Terms & Conditions</a>
+          <a href="/opt-in" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Get Started</a>
           <button onClick={() => { setView('contact'); window.scrollTo(0,0); }} className="hover:text-white transition-colors">Contact Us</button>
         </div>
-        <p className="text-gray-500 text-sm">© 2026 NextFlow AI Agency.</p>
+        <p className="text-gray-500 text-sm">© 2026 AI Voice Hub.</p>
       </div>
     </div>
   </footer>
@@ -747,8 +680,6 @@ export default function App() {
 
   const renderView = () => {
     switch(view) {
-      case 'privacy': return <PrivacyPage setView={setView} />;
-      case 'terms': return <TermsPage setView={setView} />;
       case 'contact': return <ContactPage setView={setView} />;
       default: return (
         <>
